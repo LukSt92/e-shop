@@ -1,0 +1,54 @@
+import React from "react";
+
+const btnSize: Record<string, string> = {
+  XXL: "h-[60px] px-[16px] text-[18px]",
+  XL: "h-[54px] px-[14px] text-[16px]",
+  L: "h-[50px] px-[12px] text-[16px]",
+  M: "h-[44px] px-[10px] text-[14px]",
+  S: "h-[40px] px-[8px] text-[14px]",
+  XS: "h-[34px] px-[6px] text-[12px]",
+};
+
+const btnStyle: Record<string, string> = {
+  fill: "bg-primary-500 text-base-white hover:bg-primary-600 active:bg-primary-600 disabled:bg-primary-300",
+  text: "text-primary-500 hover:text-primary-600 active:text-primary-400 disabled:text-primary-300",
+  stroke:
+    "text-primary-500 border border-primary-500 hover:border-primary-400 active:border-primary-400 active:text-primary-400 disabled:border-primary-300 disabled:text-primary-300",
+};
+
+const baseStyle =
+  "flex flex-row gap-[14px] py-[20px] justify-center items-center shrink-0 cursor-pointer rounded-md ";
+
+interface BtnProps {
+  children: React.ReactNode | string;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  style: string;
+  size: string;
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+const Button = ({
+  children,
+  leftIcon,
+  rightIcon,
+  style,
+  size,
+  onClick,
+  disabled,
+}: BtnProps) => {
+  return (
+    <button
+      className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {leftIcon}
+      {children}
+      {rightIcon}
+    </button>
+  );
+};
+
+export default Button;
