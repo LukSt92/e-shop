@@ -10,3 +10,13 @@ export type Brand = {
   name: string;
   logoUrl: string;
 };
+
+export type Product = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  imageUrls: string[];
+  category: { name: string };
+};

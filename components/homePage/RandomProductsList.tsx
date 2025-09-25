@@ -1,17 +1,18 @@
 "use client";
-import { Brand } from "@/app/lib/types";
+import { Product } from "@/app/lib/types";
 import { useRef, useState, useEffect } from "react";
 import DataCard from "../shared/DataCard";
 import Button from "../shared/Button";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import Image from "next/image";
+import ProductCard from "../shared/ProductCard";
 
-type ScrollableListProps = {
-  data: Brand[];
+type RandomProductsListProps = {
+  data: Product[];
   title: string;
 };
-const ScrollableList = ({ data, title }: ScrollableListProps) => {
+const RandomProductsList = ({ data, title }: RandomProductsListProps) => {
   const listRef = useRef<HTMLDivElement>(null);
   const [showSeeAll, setShowSeeAll] = useState(true);
 
@@ -54,15 +55,7 @@ const ScrollableList = ({ data, title }: ScrollableListProps) => {
       >
         {data.map((data) => (
           <div key={data.id} className="flex-shrink-0">
-            <DataCard name={data.name}>
-              <Image
-                src={data.logoUrl}
-                alt={data.name}
-                width={80}
-                height={46}
-                className="w-auto min-h-[64px] max-h-[64px] max-w-[120px]"
-              />
-            </DataCard>
+            <ProductCard data={data} />
           </div>
         ))}
       </div>
@@ -70,4 +63,4 @@ const ScrollableList = ({ data, title }: ScrollableListProps) => {
   );
 };
 
-export default ScrollableList;
+export default RandomProductsList;

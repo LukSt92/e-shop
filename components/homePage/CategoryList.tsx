@@ -24,7 +24,7 @@ const CategoryList = ({ categories }: CategoryListProps) => {
   return (
     <div className="px-[40px]">
       <p className="text-[28px] text-neutral-50 pb-[32px]">Category</p>
-      <div className="flex justify-between">
+      <div className="flex flex-wrap justify-between gap-8 ">
         {/* {TODO dodać Link by przechodzić na stronę z produktami} */}
         {categories.map((cat) => (
           <DataCard key={cat.id} name={cat.name}>
