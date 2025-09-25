@@ -1,6 +1,12 @@
-import { ArrowLeftIcon } from "@/components/icons/ArrowLeftIcon";
-import Button from "@/components/shared/Button";
+import MainCarousel from "@/components/homePage/MainCarousel";
+import { getData } from "@/services/getData";
 
-export default function Home() {
-  return <div></div>;
+export default async function Home() {
+  const data = await getData("/api/categories");
+
+  return (
+    <div>
+      <MainCarousel categories={data.categories} />
+    </div>
+  );
 }

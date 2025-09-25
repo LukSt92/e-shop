@@ -7,37 +7,37 @@ async function main() {
     prisma.brand.create({
       data: {
         name: "ROG",
-        logoUrl: "https://ibb.co/cXMsWfmQ",
+        logoUrl: "https://i.ibb.co/3YGPx6Jc/ROG.png",
       },
     }),
     prisma.brand.create({
       data: {
         name: "Logitech",
-        logoUrl: "https://ibb.co/8gCb6LZp",
+        logoUrl: "https://i.ibb.co/v4FhZ6nG/Logitech.png",
       },
     }),
     prisma.brand.create({
       data: {
         name: "JBL",
-        logoUrl: "https://ibb.co/Ld0PvBrg",
+        logoUrl: "https://i.ibb.co/fdXSQZ9N/JBL.png",
       },
     }),
     prisma.brand.create({
       data: {
         name: "AOC",
-        logoUrl: "https://ibb.co/HfZgWcFW",
+        logoUrl: "https://i.ibb.co/sd730Tm0/AOC.png",
       },
     }),
     prisma.brand.create({
       data: {
         name: "Razer",
-        logoUrl: "https://ibb.co/KpbHnfzx",
+        logoUrl: "https://i.ibb.co/4nKxkXgR/Razer.png",
       },
     }),
     prisma.brand.create({
       data: {
         name: "Rexus",
-        logoUrl: "https://ibb.co/fG4mpH3n",
+        logoUrl: "https://i.ibb.co/QjrsNMWC/Rexus.png",
       },
     }),
   ]);
@@ -48,7 +48,7 @@ async function main() {
         name: "mice",
         description:
           "Discover the convenience and precision of navigating your computer—explore a wide range of mice that will boost your comfort and productivity every day.",
-        imageUrl: "https://ibb.co/mCBKk2h1",
+        imageUrl: "https://i.ibb.co/pvPTcM4G/myszka-razer.png",
       },
     }),
     prisma.category.create({
@@ -56,7 +56,7 @@ async function main() {
         name: "keyboards",
         description:
           "Experience fast, comfortable typing with keyboards designed to boost productivity and suit all your computing needs.",
-        imageUrl: "https://ibb.co/zTDNLrVF",
+        imageUrl: "https://i.ibb.co/G4NF10Q9/klawiatura-razer.png",
       },
     }),
     prisma.category.create({
@@ -64,7 +64,7 @@ async function main() {
         name: "monitors",
         description:
           "See every detail with vibrant, sharp monitors perfect for work, entertainment, and creative projects.",
-        imageUrl: "https://ibb.co/NdRLyYf9",
+        imageUrl: "https://i.ibb.co/21JjkKRv/monitor-rog.png",
       },
     }),
     prisma.category.create({
@@ -72,7 +72,7 @@ async function main() {
         name: "headphones",
         description:
           "Enjoy immersive sound quality and comfort with headphones made for music, calls, and gaming.",
-        imageUrl: "https://ibb.co/LDdkTjj8",
+        imageUrl: "https://i.ibb.co/TDMvQjjk/sluchawki-razer.png",
       },
     }),
     prisma.category.create({
@@ -80,7 +80,7 @@ async function main() {
         name: "webcams",
         description:
           "Stay connected with clear, reliable webcams ideal for video calls, streaming, and online meetings.",
-        imageUrl: "https://ibb.co/qYwmCQzH",
+        imageUrl: "https://i.ibb.co/wh1p7mTn/kamerka-logitech.png",
       },
     }),
   ]);
@@ -96,9 +96,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -110,9 +110,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -124,9 +124,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -138,9 +138,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -151,9 +151,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -164,9 +164,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[0].id,
         imageUrls: [
-          "https://ibb.co/RpR8w3FY",
-          "https://ibb.co/8Lk736fV",
-          "https://ibb.co/Tqxz7Tjr",
+          "https://i.ibb.co/kgNZC475/myszka3.png",
+          "https://i.ibb.co/39KCXBjH/myszka2.png",
+          "https://i.ibb.co/YTFv1Wnb/myszka1.png",
         ],
       },
       {
@@ -178,9 +178,9 @@ async function main() {
         brandId: brands[5].id,
         categoryId: categories[1].id,
         imageUrls: [
-          "https://ibb.co/BKfv2Zbp",
-          "https://ibb.co/sBxcxm9",
-          "https://ibb.co/bjCLkcht",
+          "https://i.ibb.co/Z1fvz85j/klawa3.png",
+          "https://i.ibb.co/Xw0602x/klawa2.png",
+          "https://i.ibb.co/fVytsjRJ/klawa1.png",
         ],
       },
       {
@@ -192,9 +192,9 @@ async function main() {
         brandId: brands[5].id,
         categoryId: categories[1].id,
         imageUrls: [
-          "https://ibb.co/BKfv2Zbp",
-          "https://ibb.co/sBxcxm9",
-          "https://ibb.co/bjCLkcht",
+          "https://i.ibb.co/Z1fvz85j/klawa3.png",
+          "https://i.ibb.co/Xw0602x/klawa2.png",
+          "https://i.ibb.co/fVytsjRJ/klawa1.png",
         ],
       },
       {
@@ -206,9 +206,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[1].id,
         imageUrls: [
-          "https://ibb.co/BKfv2Zbp",
-          "https://ibb.co/sBxcxm9",
-          "https://ibb.co/bjCLkcht",
+          "https://i.ibb.co/Z1fvz85j/klawa3.png",
+          "https://i.ibb.co/Xw0602x/klawa2.png",
+          "https://i.ibb.co/fVytsjRJ/klawa1.png",
         ],
       },
       {
@@ -220,9 +220,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[1].id,
         imageUrls: [
-          "https://ibb.co/BKfv2Zbp",
-          "https://ibb.co/sBxcxm9",
-          "https://ibb.co/bjCLkcht",
+          "https://i.ibb.co/Z1fvz85j/klawa3.png",
+          "https://i.ibb.co/Xw0602x/klawa2.png",
+          "https://i.ibb.co/fVytsjRJ/klawa1.png",
         ],
       },
       {
@@ -234,9 +234,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[1].id,
         imageUrls: [
-          "https://ibb.co/BKfv2Zbp",
-          "https://ibb.co/sBxcxm9",
-          "https://ibb.co/bjCLkcht",
+          "https://i.ibb.co/Z1fvz85j/klawa3.png",
+          "https://i.ibb.co/Xw0602x/klawa2.png",
+          "https://i.ibb.co/fVytsjRJ/klawa1.png",
         ],
       },
       {
@@ -247,9 +247,9 @@ async function main() {
         brandId: brands[0].id,
         categoryId: categories[2].id,
         imageUrls: [
-          "https://ibb.co/ynjZGQ0V",
-          "https://ibb.co/7dbgSWQm",
-          "https://ibb.co/TMJSzYD8",
+          "https://i.ibb.co/hRz4hmsC/mon1.png",
+          "https://i.ibb.co/Nd71FjrB/mon3.png",
+          "https://i.ibb.co/9HBLRcmT/mon2.png",
         ],
       },
       {
@@ -260,9 +260,9 @@ async function main() {
         brandId: brands[0].id,
         categoryId: categories[2].id,
         imageUrls: [
-          "https://ibb.co/ynjZGQ0V",
-          "https://ibb.co/7dbgSWQm",
-          "https://ibb.co/TMJSzYD8",
+          "https://i.ibb.co/hRz4hmsC/mon1.png",
+          "https://i.ibb.co/Nd71FjrB/mon3.png",
+          "https://i.ibb.co/9HBLRcmT/mon2.png",
         ],
       },
       {
@@ -273,9 +273,9 @@ async function main() {
         brandId: brands[1].id,
         categoryId: categories[2].id,
         imageUrls: [
-          "https://ibb.co/ynjZGQ0V",
-          "https://ibb.co/7dbgSWQm",
-          "https://ibb.co/TMJSzYD8",
+          "https://i.ibb.co/hRz4hmsC/mon1.png",
+          "https://i.ibb.co/Nd71FjrB/mon3.png",
+          "https://i.ibb.co/9HBLRcmT/mon2.png",
         ],
       },
       {
@@ -286,9 +286,9 @@ async function main() {
         brandId: brands[3].id,
         categoryId: categories[2].id,
         imageUrls: [
-          "https://ibb.co/ynjZGQ0V",
-          "https://ibb.co/7dbgSWQm",
-          "https://ibb.co/TMJSzYD8",
+          "https://i.ibb.co/hRz4hmsC/mon1.png",
+          "https://i.ibb.co/Nd71FjrB/mon3.png",
+          "https://i.ibb.co/9HBLRcmT/mon2.png",
         ],
       },
       {
@@ -299,9 +299,9 @@ async function main() {
         brandId: brands[3].id,
         categoryId: categories[2].id,
         imageUrls: [
-          "https://ibb.co/ynjZGQ0V",
-          "https://ibb.co/7dbgSWQm",
-          "https://ibb.co/TMJSzYD8",
+          "https://i.ibb.co/hRz4hmsC/mon1.png",
+          "https://i.ibb.co/Nd71FjrB/mon3.png",
+          "https://i.ibb.co/9HBLRcmT/mon2.png",
         ],
       },
       {
@@ -313,9 +313,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[3].id,
         imageUrls: [
-          "https://ibb.co/XrZHHz4t",
-          "https://ibb.co/5XzrDhrX",
-          "https://ibb.co/nqxxgcB5",
+          "https://i.ibb.co/zThddS5Z/sluch3.png",
+          "https://i.ibb.co/8nRr3grn/sluch2.png",
+          "https://i.ibb.co/Q7yybNk1/sluch1.png",
         ],
       },
       {
@@ -327,9 +327,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[3].id,
         imageUrls: [
-          "https://ibb.co/XrZHHz4t",
-          "https://ibb.co/5XzrDhrX",
-          "https://ibb.co/nqxxgcB5",
+          "https://i.ibb.co/zThddS5Z/sluch3.png",
+          "https://i.ibb.co/8nRr3grn/sluch2.png",
+          "https://i.ibb.co/Q7yybNk1/sluch1.png",
         ],
       },
       {
@@ -341,9 +341,9 @@ async function main() {
         brandId: brands[4].id,
         categoryId: categories[3].id,
         imageUrls: [
-          "https://ibb.co/XrZHHz4t",
-          "https://ibb.co/5XzrDhrX",
-          "https://ibb.co/nqxxgcB5",
+          "https://i.ibb.co/zThddS5Z/sluch3.png",
+          "https://i.ibb.co/8nRr3grn/sluch2.png",
+          "https://i.ibb.co/Q7yybNk1/sluch1.png",
         ],
       },
       {
@@ -355,9 +355,9 @@ async function main() {
         brandId: brands[2].id,
         categoryId: categories[3].id,
         imageUrls: [
-          "https://ibb.co/XrZHHz4t",
-          "https://ibb.co/5XzrDhrX",
-          "https://ibb.co/nqxxgcB5",
+          "https://i.ibb.co/zThddS5Z/sluch3.png",
+          "https://i.ibb.co/8nRr3grn/sluch2.png",
+          "https://i.ibb.co/Q7yybNk1/sluch1.png",
         ],
       },
       {
@@ -369,9 +369,9 @@ async function main() {
         brandId: brands[2].id,
         categoryId: categories[3].id,
         imageUrls: [
-          "https://ibb.co/XrZHHz4t",
-          "https://ibb.co/5XzrDhrX",
-          "https://ibb.co/nqxxgcB5",
+          "https://i.ibb.co/zThddS5Z/sluch3.png",
+          "https://i.ibb.co/8nRr3grn/sluch2.png",
+          "https://i.ibb.co/Q7yybNk1/sluch1.png",
         ],
       },
       {
@@ -382,7 +382,10 @@ async function main() {
         stock: 17,
         brandId: brands[1].id,
         categoryId: categories[4].id,
-        imageUrls: ["https://ibb.co/MDQgWS5T", "https://ibb.co/ZpfmFd9g"],
+        imageUrls: [
+          "https://i.ibb.co/C5DwN8sd/kam2.png",
+          "https://i.ibb.co/v6cYT19d/kam3.png",
+        ],
       },
       {
         name: " Logitech C920",
@@ -392,7 +395,10 @@ async function main() {
         stock: 4,
         brandId: brands[1].id,
         categoryId: categories[4].id,
-        imageUrls: ["https://ibb.co/MDQgWS5T", "https://ibb.co/ZpfmFd9g"],
+        imageUrls: [
+          "https://i.ibb.co/C5DwN8sd/kam2.png",
+          "https://i.ibb.co/v6cYT19d/kam3.png",
+        ],
       },
       {
         name: "Razer Kiyo Pro",
@@ -402,7 +408,10 @@ async function main() {
         stock: 44,
         brandId: brands[4].id,
         categoryId: categories[4].id,
-        imageUrls: ["https://ibb.co/MDQgWS5T", "https://ibb.co/ZpfmFd9g"],
+        imageUrls: [
+          "https://i.ibb.co/C5DwN8sd/kam2.png",
+          "https://i.ibb.co/v6cYT19d/kam3.png",
+        ],
       },
       {
         name: "Rexus QX-300",
@@ -412,7 +421,10 @@ async function main() {
         stock: 488,
         brandId: brands[5].id,
         categoryId: categories[4].id,
-        imageUrls: ["https://ibb.co/MDQgWS5T", "https://ibb.co/ZpfmFd9g"],
+        imageUrls: [
+          "https://i.ibb.co/C5DwN8sd/kam2.png",
+          "https://i.ibb.co/v6cYT19d/kam3.png",
+        ],
       },
       {
         name: "Rexus QX-600",
@@ -422,7 +434,10 @@ async function main() {
         stock: 34,
         brandId: brands[5].id,
         categoryId: categories[4].id,
-        imageUrls: ["https://ibb.co/MDQgWS5T", "https://ibb.co/ZpfmFd9g"],
+        imageUrls: [
+          "https://i.ibb.co/C5DwN8sd/kam2.png",
+          "https://i.ibb.co/v6cYT19d/kam3.png",
+        ],
       },
     ],
   });

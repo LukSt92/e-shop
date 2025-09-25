@@ -55,7 +55,7 @@ const ApplePayIcon = () => {
           width="66.5429"
           height="49.959"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
