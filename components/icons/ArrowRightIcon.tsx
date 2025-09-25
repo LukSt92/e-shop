@@ -1,6 +1,10 @@
 import React from "react";
 
-const ArrowRightIcon = () => {
+type props = {
+  color: string;
+};
+
+const ArrowRightIcon = ({ color }: props) => {
   return (
     <svg
       width="24"
@@ -11,10 +15,10 @@ const ArrowRightIcon = () => {
     >
       <path
         d="M20 12L4 12M20 12L14 18M20 12L14 6"
-        stroke="#262626"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

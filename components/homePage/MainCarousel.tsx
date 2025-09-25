@@ -4,13 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Button from "../shared/Button";
 import { capFirstLet } from "@/utilis/capFirstLet";
-
-type Category = {
-  id: number;
-  name: string;
-  description: string;
-  imageUrl: string;
-};
+import { Category } from "@/app/lib/types";
 
 type CarouselProps = {
   categories: Category[];

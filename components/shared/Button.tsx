@@ -21,32 +21,20 @@ const baseStyle =
 
 interface BtnProps {
   children: React.ReactNode | string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
   style: string;
   size: string;
   disabled?: boolean;
   onClick?: () => void;
 }
 
-const Button = ({
-  children,
-  leftIcon,
-  rightIcon,
-  style,
-  size,
-  onClick,
-  disabled,
-}: BtnProps) => {
+const Button = ({ children, style, size, onClick, disabled }: BtnProps) => {
   return (
     <button
       className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]}`}
       onClick={onClick}
       disabled={disabled}
     >
-      {leftIcon}
-      {children}
-      {rightIcon}
+      <div className="flex gap-2 items-center"> {children}</div>
     </button>
   );
 };
