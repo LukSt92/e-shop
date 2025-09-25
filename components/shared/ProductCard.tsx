@@ -24,7 +24,9 @@ const ProductCard = ({ data }: ProductCardProps) => {
       <p className="text-[18px] text-neutral-50 pt-[16px] pb-[8px]">
         {data.name}
       </p>
-      <p className="text-[28px] text-neutral-50 font-semibold">{data.price}</p>
+      <p className="text-[28px] text-neutral-50 font-semibold">
+        {parseFloat(data.price.toString())}
+      </p>
     </div>
   );
 };

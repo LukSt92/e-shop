@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "../shared/Button";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import { Category } from "@/app/lib/types";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 type CarouselProps = {
   categories: Category[];
@@ -34,6 +35,7 @@ export default function MainCarousel({ categories }: CarouselProps) {
           </p>
           <Button style="stroke" size="XL">
             Explore Category
+            <ArrowRightIcon color="#ee701d" />
           </Button>
         </div>
         <div className="h-80 relative justify-items-center overflow-hidden mx-[60px] md:mr-[120px]">
