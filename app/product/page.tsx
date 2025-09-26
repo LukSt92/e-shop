@@ -1,9 +1,19 @@
 import Filter from "@/components/productPage/Filter";
+import ProductGrid from "@/components/productPage/ProductGrid";
 import Sorter from "@/components/productPage/Sorter";
 import { getData } from "@/services/getData";
 
-export default async function Product() {
+export default async function Product({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const filterParams = await searchParams;
+  const params = new URLSearchParams(
+    filterParams as Record<string, string>
+  ).toString();
   const dataCat = await getData("/api/categories");
+  const filteredProducts = await getData(`/api/products?${params}`);
 
   return (
     <div className="flex px-[40px]">
@@ -12,6 +22,7 @@ export default async function Product() {
       </div>
       <div className="w-4/5">
         <Sorter />
+        <ProductGrid data={filteredProducts} />
       </div>
     </div>
   );

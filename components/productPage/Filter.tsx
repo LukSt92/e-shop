@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
 import { Category } from "@/app/lib/types";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import CurrencyInput from "react-currency-input-field";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type FilterProps = {
   data: Category[];
@@ -12,9 +13,11 @@ type FilterProps = {
 const Filter = ({ data }: FilterProps) => {
   const [selectedCat, setSelectedCat] = useState<number[]>([]);
   const [minPrice, setMinPrice] = useState<string>();
-  const [maxPrive, setMaxPrice] = useState<string>();
+  const [maxPrice, setMaxPrice] = useState<string>();
   const [isVisibleCat, setIsVisibleCat] = useState<boolean>(true);
   const [isVisiblePrice, setIsVisiblePrice] = useState<boolean>(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const changeHandler = (value: number) => {
     const updatedCategories = selectedCat.includes(value)
@@ -29,6 +32,23 @@ const Filter = ({ data }: FilterProps) => {
   const visiblePriceHandler = () => {
     setIsVisiblePrice(!isVisiblePrice);
   };
+
+  useEffect(() => {
+    const updateParams = () => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (selectedCat.length > 0) {
+        params.set("categoryId", selectedCat.join(" "));
+      } else {
+        params.delete("categoryId");
+      }
+      if (minPrice) params.set("minPrice", minPrice);
+      else params.delete("minPrice");
+      if (maxPrice) params.set("maxPrice", maxPrice);
+      else params.delete("maxPrice", maxPrice);
+      router.push(`/product?${params.toString()}`);
+    };
+    updateParams();
+  }, [minPrice, maxPrice, selectedCat, searchParams, router]);
 
   return (
     <>

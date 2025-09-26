@@ -1,4 +1,5 @@
 "use client";
+import { capFirstLet } from "@/utilis/capFirstLet";
 import React, { useState } from "react";
 
 const Sorter = () => {
@@ -23,7 +24,7 @@ const Sorter = () => {
         >
           {sortOptions.map((opt, index) => (
             <option key={index} value={opt.val}>
-              {opt.text}
+              {capFirstLet(opt.text)}
             </option>
           ))}
         </select>

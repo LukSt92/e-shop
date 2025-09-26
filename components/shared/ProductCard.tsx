@@ -9,7 +9,7 @@ type ProductCardProps = {
 
 const ProductCard = ({ data }: ProductCardProps) => {
   return (
-    <div className="w-[300px] h-[386px] pt-[16px] pb-[20px] px-[16px] bg-neutral-900 border rounded-md border-gray-400 flex flex-col">
+    <div className="w-[300px] h-[386px] pt-[16px] pb-[20px] px-[16px] bg-neutral-900 border rounded-md border-border flex flex-col">
       <div className="relative w-full h-50 mb-[18px]">
         <Image
           src={data.imageUrls[0]}
