@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
 import { Category } from "@/app/lib/types";
 import { capFirstLet } from "@/utilis/capFirstLet";
+import CurrencyInput from "react-currency-input-field";
 
 type FilterProps = {
   data: Category[];
@@ -10,7 +11,10 @@ type FilterProps = {
 
 const Filter = ({ data }: FilterProps) => {
   const [selectedCat, setSelectedCat] = useState<number[]>([]);
+  const [minPrice, setMinPrice] = useState<string>();
+  const [maxPrive, setMaxPrice] = useState<string>();
   const [isVisibleCat, setIsVisibleCat] = useState<boolean>(true);
+  const [isVisiblePrice, setIsVisiblePrice] = useState<boolean>(true);
 
   const changeHandler = (value: number) => {
     const updatedCategories = selectedCat.includes(value)
@@ -21,6 +25,9 @@ const Filter = ({ data }: FilterProps) => {
 
   const visibleCatHandler = () => {
     setIsVisibleCat(!isVisibleCat);
+  };
+  const visiblePriceHandler = () => {
+    setIsVisiblePrice(!isVisiblePrice);
   };
 
   return (
@@ -57,6 +64,32 @@ const Filter = ({ data }: FilterProps) => {
             {capFirstLet(c.name)}
           </label>
         ))}
+      </div>
+      <div className="flex justify-between items-center pb-[16px] pt-[52px] ">
+        <p className="text-[20px] font-semibold text-neutral-50">Price</p>
+        <div onClick={() => visiblePriceHandler()}>
+          <ChevronDownIcon />
+        </div>
+      </div>
+      <div
+        className={`flex flex-col gap-[16px] ${
+          !isVisiblePrice ? "hidden" : ""
+        }`}
+      >
+        <CurrencyInput
+          decimalsLimit={2}
+          placeholder="$ Min Price"
+          prefix="$"
+          onValueChange={(value) => setMinPrice(value)}
+          className="bg-neutral-900 border border-gray-400 rounded-md text-neutral-50 text-[16px] py-[14px] px-[18px] w-[150px]"
+        />
+        <CurrencyInput
+          decimalsLimit={2}
+          placeholder="$ Max Price"
+          prefix="$"
+          onValueChange={(value) => setMaxPrice(value)}
+          className="bg-neutral-900 border border-gray-400 rounded-md text-neutral-50 text-[16px] py-[14px] px-[18px] w-[150px]"
+        />
       </div>
     </>
   );
