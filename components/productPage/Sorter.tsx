@@ -1,6 +1,7 @@
 "use client";
 import { capFirstLet } from "@/utilis/capFirstLet";
-import React, { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const Sorter = () => {
   const [sorting, setSorting] = useState<string>("latest");
@@ -11,6 +12,18 @@ const Sorter = () => {
     { val: "asc", text: "price highest" },
     { val: "desc", text: "price lowest" },
   ];
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const updateParams = () => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("sortBy", sorting);
+      params.set("show", showing);
+      router.push(`/product?${params.toString()}`);
+    };
+    updateParams();
+  }, [router, searchParams, sorting, showing]);
 
   return (
     <div className="flex gap-[60px] pl-[40px]">

@@ -15,6 +15,10 @@ export async function GET(req: NextRequest) {
     const maxPrice = searchParams.get("maxPrice")
       ? parseFloat(searchParams.get("maxPrice")!)
       : undefined;
+    const sortBy = searchParams.get("sortBy") || "latest";
+    const show = Number(searchParams.get("show")) || 3;
+
+    console.log(show);
 
     const where: Prisma.ProductWhereInput = {};
     if (categoryIds !== undefined) {
@@ -38,6 +42,15 @@ export async function GET(req: NextRequest) {
         createdAt: true,
         category: { select: { id: true, name: true } },
       },
+      orderBy:
+        sortBy === "latest"
+          ? { createdAt: "desc" }
+          : sortBy === "asc"
+          ? { price: "desc" }
+          : sortBy === "desc"
+          ? { price: "asc" }
+          : { createdAt: "desc" },
+      take: show,
     });
 
     return NextResponse.json(products);
