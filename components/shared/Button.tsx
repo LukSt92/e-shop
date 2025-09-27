@@ -24,13 +24,23 @@ interface BtnProps {
   style: string;
   size: string;
   disabled?: boolean;
+  fit?: boolean;
   onClick?: () => void;
 }
 
-const Button = ({ children, style, size, onClick, disabled }: BtnProps) => {
+const Button = ({
+  children,
+  style,
+  size,
+  onClick,
+  disabled,
+  fit = true,
+}: BtnProps) => {
   return (
     <button
-      className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]}  max-w-fit`}
+      className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]} ${
+        fit ? "max-w-fit" : ""
+      }`}
       onClick={onClick}
       disabled={disabled}
     >
