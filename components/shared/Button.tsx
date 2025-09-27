@@ -30,7 +30,7 @@ interface BtnProps {
 const Button = ({ children, style, size, onClick, disabled }: BtnProps) => {
   return (
     <button
-      className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]}`}
+      className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]}  max-w-fit`}
       onClick={onClick}
       disabled={disabled}
     >

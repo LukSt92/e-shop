@@ -6,10 +6,10 @@ import NavBar from "../shared/NavBar";
 const Header = () => {
   return (
     <div className="px-[40px] py-[32px]">
-      <div className="flex justify-between pb-[40px]">
+      <div className="flex justify-between items-center pb-[40px]">
         <Logo />
         {/*TODO dodać ifa jeżeli użytkownik jest zalogowany zamienić btn na koszyk i awatar!*/}
-        <Button style="fill" size="S">
+        <Button style="fill" size="L">
           Sign in
         </Button>
       </div>

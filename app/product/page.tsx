@@ -10,11 +10,13 @@ export default async function Product({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const filterParams = await searchParams;
-  const params = new URLSearchParams(
-    filterParams as Record<string, string>
-  ).toString();
+  const params = new URLSearchParams(filterParams as Record<string, string>);
   const dataCat = await getData("/api/categories");
-  const filteredProducts = await getData(`/api/products?${params}`);
+  const { products, page, totalPages } = await getData(
+    `/api/products?${params.toString()}`
+  );
+  params.delete("page");
+  const paginationUrl = `/product?${params.toString()}`;
 
   return (
     <div className="flex px-[40px]">
@@ -23,8 +25,8 @@ export default async function Product({
       </div>
       <div className="w-4/5">
         <Sorter />
-        <ProductGrid data={filteredProducts} />
-        <Pagination page={2} totalPages={5} url={"test"} />
+        <ProductGrid data={products} />
+        <Pagination page={page} totalPages={totalPages} url={paginationUrl} />
       </div>
     </div>
   );

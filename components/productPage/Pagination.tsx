@@ -1,6 +1,8 @@
-"use client";
 import Link from "next/link";
 import React from "react";
+import Button from "../shared/Button";
+import ArrowLeftIcon from "../icons/ArrowLeftIcon";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 type PaginationProps = {
   page: number;
@@ -14,18 +16,36 @@ const Pagination = ({ page, totalPages, url }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-start mt-6 gap-2">
-      {pages.map((p) => (
-        <Link
-          key={p}
-          href={`${url}&page=${p}`}
-          className={`px-3 py-1 rounded transition-colors cursor-pointer ${
-            p === page ? "bg-orange-500 text-white" : "text-[#B0B0B0]"
-          }`}
-        >
-          {p}
+    <div className="flex items-center justify-between">
+      <div className="flex justify-start px-[40px] gap-[8px]">
+        {pages.map((p) => (
+          <Link key={p} href={`${url}&page=${p}`}>
+            <div
+              className={`rounded-md flex items-center justify-center text-[16px] cursor-pointer w-[44px] h-[44px] ${
+                p === page
+                  ? "bg-primary-500 text-neutral-900"
+                  : "text-neutral-500"
+              }`}
+            >
+              {p}
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="flex gap-x-[32px]">
+        <Link href={`${url}&page=${page > 1 ? page - 1 : 1}`}>
+          <Button style="stroke" size="XL">
+            <ArrowLeftIcon color="#EE701D" />
+            Previous
+          </Button>
         </Link>
-      ))}
+        <Link href={`${url}&page=${page < totalPages ? page + 1 : totalPages}`}>
+          <Button style="stroke" size="XL">
+            Next
+            <ArrowRightIcon color="#EE701D" />
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
