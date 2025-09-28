@@ -4,13 +4,15 @@ import Button from "../shared/Button";
 import MinusIcon from "../icons/MinusIcon";
 import PlusIcon from "../icons/PlusIcon";
 import CartIcon from "../icons/CartIcon";
+import { addToCart } from "@/services/addToCart";
 
 type DetailerProps = {
   stock: number;
   price: number;
+  id: number;
 };
 
-const Detailer = ({ stock, price }: DetailerProps) => {
+const Detailer = ({ stock, price, id }: DetailerProps) => {
   const [quantity, setQuantity] = useState<number>(1);
 
   const quantityHandler = (add: boolean) => {
@@ -59,7 +61,12 @@ const Detailer = ({ stock, price }: DetailerProps) => {
           {(quantity * price).toFixed(2)}
         </p>
       </div>
-      <Button style="stroke" size="XXL" fit={false}>
+      <Button
+        style="stroke"
+        size="XXL"
+        fit={false}
+        onClick={() => addToCart(id, quantity)}
+      >
         Add to Cart
         <CartIcon color="#ee701d" />
       </Button>

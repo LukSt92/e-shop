@@ -1,8 +1,11 @@
+"use client";
 import { Product } from "@/app/lib/types";
 import Image from "next/image";
 import React from "react";
 import Badge from "./Badge";
 import Link from "next/link";
+import CartIcon from "../icons/CartIcon";
+import { addToCart } from "@/services/addToCart";
 
 type ProductCardProps = {
   data: Product;
@@ -10,7 +13,7 @@ type ProductCardProps = {
 
 const ProductCard = ({ data }: ProductCardProps) => {
   return (
-    <div className="w-[300px] h-[386px] pt-[16px] pb-[20px] px-[16px] bg-neutral-900 border rounded-md border-border flex flex-col">
+    <div className="relative w-[300px] h-[386px] pt-[16px] pb-[20px] px-[16px] bg-neutral-900 border rounded-md border-border flex flex-col">
       <Link href={`/product/${data.id}`}>
         <div className="relative w-full h-50 mb-[18px]">
           <Image
@@ -30,6 +33,12 @@ const ProductCard = ({ data }: ProductCardProps) => {
           {parseFloat(data.price.toString())}
         </p>
       </Link>
+      <div
+        onClick={() => addToCart(data.id)}
+        className="bg-neutral-900 rounded-md w-[32px] h-[32px] p-[4px] absolute m-[16px] cursor-pointer"
+      >
+        <CartIcon color="#FCFCFC" />
+      </div>
     </div>
   );
 };

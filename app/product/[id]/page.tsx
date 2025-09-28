@@ -25,7 +25,7 @@ export default async function ProductDetails({
           price={product.price}
           deliveryDay={deliveryDay}
         />
-        <Detailer stock={product.stock} price={product.price} />
+        <Detailer stock={product.stock} price={product.price} id={product.id} />
       </div>
     </div>
   );

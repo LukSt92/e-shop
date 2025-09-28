@@ -9,15 +9,14 @@ import Image from "next/image";
 import CartIcon from "../icons/CartIcon";
 
 const Header = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
-  console.log(status);
+  console.log(session);
 
   return (
     <div className="px-[40px] py-[32px]">
       <div className="flex justify-between items-center pb-[40px]">
         <Logo />
-        {/*TODO dodać ifa jeżeli użytkownik jest zalogowany zamienić btn na koszyk i awatar!*/}
         <div>
           {session ? (
             <div className="flex gap-x-[28px] items-center">
