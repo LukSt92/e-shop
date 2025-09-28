@@ -6,6 +6,7 @@ import Button from "../shared/Button";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import Image from "next/image";
+import Link from "next/link";
 
 type BrandListProps = {
   data: Brand[];
@@ -54,15 +55,17 @@ const BrandList = ({ data, title }: BrandListProps) => {
       >
         {data.map((data) => (
           <div key={data.id} className="flex-shrink-0">
-            <DataCard name={data.name}>
-              <Image
-                src={data.logoUrl}
-                alt={data.name}
-                width={80}
-                height={46}
-                className="w-auto min-h-[64px] max-h-[64px] max-w-[120px]"
-              />
-            </DataCard>
+            <Link href={"/product"}>
+              <DataCard name={data.name}>
+                <Image
+                  src={data.logoUrl}
+                  alt={data.name}
+                  width={80}
+                  height={46}
+                  className="w-auto min-h-[64px] max-h-[64px] max-w-[120px]"
+                />
+              </DataCard>
+            </Link>
           </div>
         ))}
       </div>

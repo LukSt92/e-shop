@@ -6,6 +6,9 @@ import Button from "../shared/Button";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import { Category } from "@/app/lib/types";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
+import ChevronLeft from "../icons/ChevronLeft";
+import ChevronRight from "../icons/ChevronRight";
+import Link from "next/link";
 
 type CarouselProps = {
   categories: Category[];
@@ -33,10 +36,12 @@ export default function MainCarousel({ categories }: CarouselProps) {
           <p className="text-gray-400 pb-10 pt-2 text-left">
             {current.description}
           </p>
-          <Button style="stroke" size="XL">
-            Explore Category
-            <ArrowRightIcon color="#ee701d" />
-          </Button>
+          <Link href={`/product?categoryId=${current.id}`}>
+            <Button style="stroke" size="XL">
+              Explore Category
+              <ArrowRightIcon color="#ee701d" />
+            </Button>
+          </Link>
         </div>
         <div className="h-80 relative justify-items-center overflow-hidden mx-[60px] md:mr-[120px]">
           <Image
@@ -49,14 +54,14 @@ export default function MainCarousel({ categories }: CarouselProps) {
         </div>
       </div>
       <div className="absolute inset-y-0 left-0 flex items-center">
-        <Button onClick={handlePrev} style="fill" size="M">
-          ◀
+        <Button onClick={handlePrev} style="fill" size="L">
+          <ChevronLeft />
         </Button>
       </div>
 
       <div className="absolute inset-y-0 right-0 flex items-center pl-[120px]">
-        <Button onClick={handleNext} style="fill" size="M">
-          ▶
+        <Button onClick={handleNext} style="fill" size="L">
+          <ChevronRight />
         </Button>
       </div>
       <div className="flex justify-center gap-2 mt-6">

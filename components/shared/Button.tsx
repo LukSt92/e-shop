@@ -10,7 +10,7 @@ const btnSize: Record<string, string> = {
 };
 
 const btnStyle: Record<string, string> = {
-  fill: "bg-primary-500 text-base-white hover:bg-primary-600 active:bg-primary-600 disabled:bg-primary-300",
+  fill: "bg-primary-400 text-base-white hover:bg-primary-600 active:bg-primary-600 disabled:bg-primary-300",
   text: "text-primary-500 hover:text-primary-600 active:text-primary-400 disabled:text-primary-300",
   stroke:
     "text-primary-500 border border-primary-500 hover:border-primary-400 active:border-primary-400 active:text-primary-400 disabled:border-primary-300 disabled:text-primary-300",

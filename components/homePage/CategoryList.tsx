@@ -7,6 +7,7 @@ import MouseIcon from "../icons/MouseIcon";
 import WebcamIcon from "../icons/WebcamIcon";
 import HeadphoneIcon from "../icons/HeadphoneIcon";
 import DataCard from "../shared/DataCard";
+import Link from "next/link";
 
 type CategoryListProps = {
   categories: Category[];
@@ -25,11 +26,10 @@ const CategoryList = ({ categories }: CategoryListProps) => {
     <div className="px-[40px]">
       <p className="text-[28px] text-neutral-50 pb-[32px]">Category</p>
       <div className="flex flex-wrap justify-between gap-8 ">
-        {/* {TODO dodać Link by przechodzić na stronę z produktami} */}
         {categories.map((cat) => (
-          <DataCard key={cat.id} name={cat.name}>
-            {categoryIcons[cat.name]}
-          </DataCard>
+          <Link key={cat.id} href={`/product?categoryId=${cat.id}`}>
+            <DataCard name={cat.name}>{categoryIcons[cat.name]}</DataCard>
+          </Link>
         ))}
       </div>
     </div>
