@@ -16,6 +16,8 @@ const Gallery = ({ imageUrls, name }: GalleryProps) => {
           src={mainImg}
           alt={name}
           fill
+          priority
+          sizes="(max-width: 768px) 100vw, 268px"
           className="object-cover border rounded-md"
         />
       </div>
