@@ -1,5 +1,5 @@
 "use client";
-import { CartItem } from "@/app/lib/types";
+import { CartItem } from "@/lib/types";
 import Image from "next/image";
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import Badge from "../shared/Badge";

@@ -9,6 +9,8 @@ export default async function Home() {
   const dataBrands = await getData("/api/brands");
   const randomProducts = await getData("/api/products/random");
 
+  if (!dataCat || !dataBrands || !randomProducts) return <p>Please wait</p>;
+
   return (
     <div>
       <MainCarousel categories={dataCat.categories} />

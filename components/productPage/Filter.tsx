@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
-import { Category } from "@/app/lib/types";
+import { Category } from "@/lib/types";
 import { capFirstLet } from "@/utilis/capFirstLet";
 import CurrencyInput from "react-currency-input-field";
 import { useRouter, useSearchParams } from "next/navigation";

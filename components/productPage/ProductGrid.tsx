@@ -1,4 +1,4 @@
-import { Product } from "@/app/lib/types";
+import { Product } from "@/lib/types";
 import React from "react";
 import ProductCard from "../shared/ProductCard";
 

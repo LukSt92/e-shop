@@ -1,5 +1,5 @@
 "use client";
-import { Brand } from "@/app/lib/types";
+import { Brand } from "@/lib/types";
 import { useRef, useState, useEffect } from "react";
 import DataCard from "../shared/DataCard";
 import Button from "../shared/Button";

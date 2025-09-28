@@ -1,6 +1,6 @@
 import React from "react";
 import { JSX } from "react";
-import { Category } from "@/app/lib/types";
+import { Category } from "@/lib/types";
 import MonitorIcon from "../icons/MonitorIcon";
 import KeyboardIcon from "../icons/KeyboardIcon";
 import MouseIcon from "../icons/MouseIcon";

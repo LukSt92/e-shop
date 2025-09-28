@@ -3,7 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { registerSchema } from "@/app/lib/schema";
+import { registerSchema } from "@/lib/schema";
 import { z } from "zod";
 import InputForm from "../shared/InputForm";
 

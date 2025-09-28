@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Button from "../shared/Button";
 import { capFirstLet } from "@/utilis/capFirstLet";
-import { Category } from "@/app/lib/types";
+import { Category } from "@/lib/types";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import ChevronLeft from "../icons/ChevronLeft";
 import ChevronRight from "../icons/ChevronRight";

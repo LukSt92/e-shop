@@ -1,5 +1,5 @@
 "use client";
-import { CartItem } from "@/app/lib/types";
+import { CartItem } from "@/lib/types";
 import React, { Dispatch, SetStateAction } from "react";
 import CartProduct from "./CartProduct";
 

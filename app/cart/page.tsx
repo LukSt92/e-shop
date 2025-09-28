@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { CartItem } from "../lib/types";
+import { CartItem } from "../../lib/types";
 import CartProducts from "@/components/cartPage/CartProducts";
 import CartDetailer from "@/components/cartPage/CartDetailer";
 import Loader from "@/components/shared/Loader";

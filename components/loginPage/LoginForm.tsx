@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
-import { loginSchema } from "@/app/lib/schema";
-import { emailRegex, phoneRegex } from "@/app/lib/regex";
+import { loginSchema } from "@/lib/schema";
+import { emailRegex, phoneRegex } from "@/lib/regex";
 import InputForm from "../shared/InputForm";
 
 type LoginFormData = z.infer<typeof loginSchema>;

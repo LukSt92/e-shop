@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/app/lib/types";
+import { Product } from "@/lib/types";
 import { useRef, useState, useEffect } from "react";
 import Button from "../shared/Button";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
