@@ -1,11 +1,9 @@
 "use client";
 import { Product } from "@/app/lib/types";
 import { useRef, useState, useEffect } from "react";
-import DataCard from "../shared/DataCard";
 import Button from "../shared/Button";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import { capFirstLet } from "@/utilis/capFirstLet";
-import Image from "next/image";
 import ProductCard from "../shared/ProductCard";
 
 type RandomProductsListProps = {

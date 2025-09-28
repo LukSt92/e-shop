@@ -1,6 +1,10 @@
 import React from "react";
 
-const ChevronRight = () => {
+type Props = {
+  color?: string;
+};
+
+const ChevronRight = ({ color = "#262626" }: Props) => {
   return (
     <svg
       width="10"
@@ -11,7 +15,7 @@ const ChevronRight = () => {
     >
       <path
         d="M1 1L9 9L1 17"
-        stroke="#262626"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

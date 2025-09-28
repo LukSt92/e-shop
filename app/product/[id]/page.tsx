@@ -1,6 +1,7 @@
 import Detailer from "@/components/productDetailsPage/Detailer";
 import Gallery from "@/components/productDetailsPage/Gallery";
 import { ProductDesc } from "@/components/productDetailsPage/ProductDesc";
+import Breadcrumb from "@/components/shared/BreadCrumb";
 import { getData } from "@/services/getData";
 
 export default async function ProductDetails({
@@ -14,8 +15,8 @@ export default async function ProductDetails({
   console.log(product.category);
 
   return (
-    <div className="p-[40px]">
-      <div>{/* TODO dodać breadcrumb!! */}</div>
+    <div className="px-[40px]">
+      <Breadcrumb productName={product.name} />
       <div className="flex justify-between gap-[32px] max-[1080px]:flex-col">
         <div className="flex justify-between gap-[32px] max-[800px]:flex-col">
           <Gallery name={product.name} imageUrls={product.imageUrls} />
