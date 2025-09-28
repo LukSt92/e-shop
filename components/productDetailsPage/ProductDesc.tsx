@@ -18,13 +18,13 @@ export const ProductDesc = ({
   deliveryDay,
 }: ProductDescProps) => {
   return (
-    <div className="relative flex flex-col gap-y-[32px]">
-      <div>
+    <div className="relative flex flex-col gap-y-[32px] pb-[32px]">
+      <div className="gap-y-[32px]">
         <p className="text-[28px] text-neutral-50">{name}</p>
         <Badge title={category} />
       </div>
-      <p className="text-[32px] text-neutral-50">{price}</p>
-      <p className="text-[16px] text-neutral-50 text-wrap">{desc}</p>
+      <p className="text-[32px] text-neutral-50 pb-[32px]">{price}</p>
+      <p className="text-[16px] text-neutral-50 text-wrap pb-[132px]">{desc}</p>
       <div className="flex flex-col gap-y-[16px] self-start absolute bottom-0 ">
         <p className="text-[18px] text-neutral-300">Shipping Available</p>
         <div className="flex w-[312px] border rounded-md border-neutral-50 max-w-fit p-[16px]">

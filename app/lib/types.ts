@@ -20,3 +20,20 @@ export type Product = {
   imageUrls: string[];
   category: { name: string };
 };
+
+export type CartItem = {
+  id: number;
+  cartId: number;
+  productId: number;
+  quantity: number;
+  addedPrice: number;
+  product: {
+    name: string;
+    price: number;
+    imageUrls: string;
+    stock: number;
+    category: {
+      name: string;
+    };
+  };
+};

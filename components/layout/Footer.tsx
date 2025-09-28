@@ -13,7 +13,7 @@ const Footer = () => {
   const resources = ["E-books", "Tutorials", "Course", "Blog"];
 
   return (
-    <div className="bg-footer px-[40px] py-[140px] mt-auto flex justify-between">
+    <div className="bg-footer px-[40px] py-[140px] mt-auto flex justify-between max-[925px]:flex-col ">
       <div className="flex flex-col">
         <Logo />
         <p className="py-[24px] text-neutral-300 text-wrap w-[216px] ">
@@ -27,7 +27,7 @@ const Footer = () => {
           <GooglePayIcon />
         </div>
       </div>
-      <div className="flex gap-x-16">
+      <div className="flex gap-x-16 max-[600px]:flex-col max-[600px]:text-center">
         <ul>
           <li className="text-[20px] text-neutral-50 font-semibold">Company</li>
           {company.map((item, index) => (

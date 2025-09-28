@@ -39,7 +39,7 @@ const Button = ({
   return (
     <button
       className={`${baseStyle} ${btnSize[size]} ${btnStyle[style]} ${
-        fit ? "max-w-fit" : ""
+        fit ? "max-w-fit" : "w-full"
       }`}
       onClick={onClick}
       disabled={disabled}

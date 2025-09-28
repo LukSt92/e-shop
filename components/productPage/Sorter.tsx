@@ -28,7 +28,7 @@ const Sorter = () => {
   return (
     <div className="flex gap-[60px] pl-[40px]">
       <div className="flex items-center">
-        <p className="text-[20px] font-semibold text-neutral-50 pr-[16px]">
+        <p className="text-[20px] font-semibold text-neutral-50 pr-[16px] max-[700px]:hidden">
           Sort by
         </p>
         <select
@@ -43,7 +43,7 @@ const Sorter = () => {
         </select>
       </div>
       <div className="flex items-center">
-        <p className="text-[20px] font-semibold text-neutral-50 pr-[16px]">
+        <p className="text-[20px] font-semibold text-neutral-50 pr-[16px] max-[700px]:hidden">
           Show
         </p>
         <select

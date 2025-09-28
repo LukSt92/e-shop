@@ -11,8 +11,6 @@ import CartIcon from "../icons/CartIcon";
 const Header = () => {
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <div className="px-[40px] py-[32px]">
       <div className="flex justify-between items-center pb-[40px]">
@@ -20,7 +18,9 @@ const Header = () => {
         <div>
           {session ? (
             <div className="flex gap-x-[28px] items-center">
-              <CartIcon color="#FCFCFC" />
+              <Link href={"/cart"}>
+                <CartIcon color="#FCFCFC" />
+              </Link>
               <Image
                 src={"/LionAvatar.svg"}
                 alt="Avatar"

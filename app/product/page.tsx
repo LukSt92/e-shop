@@ -20,7 +20,7 @@ export default async function Product({
 
   return (
     <div className="flex px-[40px]">
-      <div className="w-1/5">
+      <div className="w-1/5 min-w-[150px]">
         <Filter data={dataCat.categories} />
       </div>
       <div className="w-4/5">

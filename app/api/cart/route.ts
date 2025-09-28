@@ -1,7 +1,7 @@
 import { prisma } from "@/app/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/lib/authOptions";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -76,6 +76,148 @@ export async function POST(req: Request) {
     console.error(error);
     return NextResponse.json(
       { message: "Internal error cart/route failed" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { message: "Unauthorized operation" },
+        { status: 401 }
+      );
+    }
+    const cart = await prisma.cart.findUnique({
+      where: {
+        userId: (
+          await prisma.user.findUnique({
+            where: { email: session.user.email },
+          })
+        )?.id,
+      },
+      include: {
+        items: {
+          include: {
+            product: {
+              include: {
+                category: {
+                  select: { id: true, name: true },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!cart) {
+      return NextResponse.json(
+        { message: "There are no products in cart" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(cart);
+  } catch (error) {
+    console.error("GET /api/cart error:", error);
+    return NextResponse.json(
+      { message: "Internal server error, api/cart/GET Failed" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { itemId, quantity } = body;
+
+    if (!quantity || quantity < 1) {
+      return NextResponse.json({ message: "Quantity error" }, { status: 400 });
+    }
+
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { message: "Unauthorized operation" },
+        { status: 401 }
+      );
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+      include: { cart: { include: { items: true } } },
+    });
+
+    if (!user?.cart) {
+      return NextResponse.json({ message: "Cart error" }, { status: 404 });
+    }
+
+    const item = user.cart.items.find((i) => i.id === itemId);
+    if (!item) {
+      return NextResponse.json(
+        { message: "Cart product error" },
+        { status: 404 }
+      );
+    }
+
+    const updatedItem = await prisma.cartItem.update({
+      where: { id: itemId },
+      data: { quantity },
+    });
+
+    return NextResponse.json(updatedItem);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Internal error api/cart/Patch error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { itemId } = body;
+
+    if (isNaN(itemId)) {
+      return NextResponse.json({ message: "Incorrect Id" }, { status: 400 });
+    }
+
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { message: "Unauthorized operation" },
+        { status: 401 }
+      );
+    }
+
+    const item = await prisma.cartItem.findFirst({
+      where: {
+        id: itemId,
+        cart: { user: { email: session.user.email } },
+      },
+    });
+
+    if (!item) {
+      return NextResponse.json(
+        { message: "This product do not exist" },
+        { status: 404 }
+      );
+    }
+
+    await prisma.cartItem.delete({ where: { id: itemId } });
+
+    return NextResponse.json({ status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Internal error api/cart/Delete error" },
       { status: 500 }
     );
   }

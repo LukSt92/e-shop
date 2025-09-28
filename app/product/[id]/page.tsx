@@ -16,15 +16,17 @@ export default async function ProductDetails({
   return (
     <div className="p-[40px]">
       <div>{/* TODO dodać breadcrumb!! */}</div>
-      <div className="flex justify-between gap-x-[32px]">
-        <Gallery name={product.name} imageUrls={product.imageUrls} />
-        <ProductDesc
-          name={product.name}
-          category={product.category.name}
-          desc={product.description}
-          price={product.price}
-          deliveryDay={deliveryDay}
-        />
+      <div className="flex justify-between gap-[32px] max-[1080px]:flex-col">
+        <div className="flex justify-between gap-[32px] max-[800px]:flex-col">
+          <Gallery name={product.name} imageUrls={product.imageUrls} />
+          <ProductDesc
+            name={product.name}
+            category={product.category.name}
+            desc={product.description}
+            price={product.price}
+            deliveryDay={deliveryDay}
+          />
+        </div>
         <Detailer stock={product.stock} price={product.price} id={product.id} />
       </div>
     </div>

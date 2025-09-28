@@ -16,8 +16,8 @@ const Pagination = ({ page, totalPages, url }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex justify-start px-[40px] gap-[8px]">
+    <div className="flex items-center justify-between max-[1030px]:flex-col pb-[40px]">
+      <div className="flex justify-start px-[40px] gap-[8px] flex-wrap">
         {pages.map((p) => (
           <Link key={p} href={`${url}&page=${p}`}>
             <div
