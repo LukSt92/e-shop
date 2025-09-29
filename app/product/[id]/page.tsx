@@ -4,10 +4,12 @@ import { ProductDesc } from "@/components/productDetailsPage/ProductDesc";
 import Breadcrumb from "@/components/shared/BreadCrumb";
 import { getData } from "@/services/getData";
 
+type Params = { id: string };
+
 export default async function ProductDetails({
   params,
 }: {
-  params: { id: string };
+  params: Promise<Params>;
 }) {
   const { id } = await params;
   const { product, deliveryDay } = await getData(`/api/products/${id}`);
