@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Product } from "@/lib/types";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -13,12 +14,16 @@ export async function GET() {
       },
     });
 
-    const shuffledProducts = products
-      .map((p) => ({ sort: Math.random(), value: p }))
-      .sort((a, b) => a.sort - b.sort)
-      .map((a) => a.value);
+    function Shuffle(products: Product[]): Product[] {
+      const result = [...products];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
 
-    const slicedProducts = shuffledProducts.slice(0, 6);
+    const slicedProducts = Shuffle(products).slice(0, 6);
 
     return NextResponse.json(slicedProducts);
   } catch (e) {
