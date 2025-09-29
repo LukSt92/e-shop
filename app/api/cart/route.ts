@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 import { NextResponse, NextRequest } from "next/server";
+import { CartItem } from "@/lib/types";
 
 export async function POST(req: Request) {
   try {
@@ -43,7 +44,7 @@ export async function POST(req: Request) {
     }
 
     const existingItem = cart.items.find(
-      (item) => item.productId === productId
+      (item: CartItem) => item.productId === productId
     );
 
     if (existingItem) {
