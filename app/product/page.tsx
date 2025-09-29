@@ -3,21 +3,19 @@ import Pagination from "@/components/productPage/Pagination";
 import ProductGrid from "@/components/productPage/ProductGrid";
 import Sorter from "@/components/productPage/Sorter";
 import Breadcrumb from "@/components/shared/BreadCrumb";
+import { getData } from "@/services/getData";
 
 export default async function Product({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const baseUrl = process.env.DB_HOST;
-  const filterParams = searchParams;
+  const filterParams = await searchParams;
   const params = new URLSearchParams(filterParams as Record<string, string>);
-  const categories = await fetch(`${baseUrl}/api/categories`);
-  const dataCat = await categories.json();
-  const dataProducts = await fetch(
-    `${baseUrl}/api/products?${params.toString()}`
+  const dataCat = await getData("/api/categories");
+  const { products, page, totalPages } = await getData(
+    `/api/products?${params.toString()}`
   );
-  const [products, page, totalPages] = await dataProducts.json();
   params.delete("page");
   const paginationUrl = `/product?${params.toString()}`;
 
