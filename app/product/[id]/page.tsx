@@ -13,26 +13,31 @@ export default async function ProductDetails({
   const baseUrl = process.env.DB_HOST;
   const { id } = await params;
 
-  const productData = await fetch(`${baseUrl}/api/products/${id}`);
-  const [product, deliveryDay] = await productData.json();
-
-  console.log(product.category);
+  const data = await fetch(`${baseUrl}/api/products/${id}`);
+  const productData = await data.json();
 
   return (
     <div className="px-[40px]">
-      <Breadcrumb productName={product.name} />
+      <Breadcrumb productName={productData.product.name} />
       <div className="flex justify-between gap-[32px] max-[1080px]:flex-col">
         <div className="flex justify-between gap-[32px] max-[800px]:flex-col">
-          <Gallery name={product.name} imageUrls={product.imageUrls} />
+          <Gallery
+            name={productData.product.name}
+            imageUrls={productData.product.imageUrls}
+          />
           <ProductDesc
-            name={product.name}
-            category={product.category.name}
-            desc={product.description}
-            price={product.price}
-            deliveryDay={deliveryDay}
+            name={productData.product.name}
+            category={productData.product.category.name}
+            desc={productData.product.description}
+            price={productData.product.price}
+            deliveryDay={productData.deliveryDay}
           />
         </div>
-        <Detailer stock={product.stock} price={product.price} id={product.id} />
+        <Detailer
+          stock={productData.product.stock}
+          price={productData.product.price}
+          id={productData.product.id}
+        />
       </div>
     </div>
   );
