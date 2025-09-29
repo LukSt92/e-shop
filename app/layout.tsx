@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SessionProv from "@/components/layout/SessionProv";
+import { Suspense } from "react";
+import Loader from "@/components/shared/Loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +26,7 @@ export default function RootLayout({
       >
         <SessionProv>
           <Header />
+          <Suspense fallback={<Loader />} />
           <main>{children}</main>
           <Footer />
         </SessionProv>

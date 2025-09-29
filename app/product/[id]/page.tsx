@@ -2,17 +2,15 @@ import Detailer from "@/components/productDetailsPage/Detailer";
 import Gallery from "@/components/productDetailsPage/Gallery";
 import { ProductDesc } from "@/components/productDetailsPage/ProductDesc";
 import Breadcrumb from "@/components/shared/BreadCrumb";
-import { getData } from "@/services/getData";
 
 type Params = { id: string };
 
-export default async function ProductDetails({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
-  const { id } = await params;
-  const { product, deliveryDay } = await getData(`/api/products/${id}`);
+export default async function ProductDetails({ params }: { params: Params }) {
+  const baseUrl = process.env.DB_HOST;
+  const { id } = params;
+
+  const productData = await fetch(`${baseUrl}/api/products/${id}`);
+  const [product, deliveryDay] = await productData.json();
 
   console.log(product.category);
 

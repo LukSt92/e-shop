@@ -24,7 +24,7 @@ export default function CartPage() {
       setSelected(data.items);
     } catch (err: unknown) {
       if (err instanceof Error) {
-        console.log(err.message);
+        return <div>Test</div>;
       } else {
         console.log("Nieznany błąd");
       }

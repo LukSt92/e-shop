@@ -7,6 +7,9 @@ export async function GET() {
 
     return NextResponse.json({ brands });
   } catch (e) {
-    console.error("Prisma failed to fetch brands", e);
+    return NextResponse.json(
+      { error: "Internal server error", e },
+      { status: 500 }
+    );
   }
 }

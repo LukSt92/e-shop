@@ -20,6 +20,9 @@ export async function GET() {
 
     return NextResponse.json(shuffledProducts);
   } catch (e) {
-    console.error("Prisma failed to fetch random products.", e);
+    return NextResponse.json(
+      { error: "Internal server error", e },
+      { status: 500 }
+    );
   }
 }

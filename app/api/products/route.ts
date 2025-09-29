@@ -61,6 +61,9 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ products, page, totalPages });
   } catch (e) {
-    console.error("Prisma failed to fetch filtered products.", e);
+    return NextResponse.json(
+      { error: "Internal server error", e },
+      { status: 500 }
+    );
   }
 }

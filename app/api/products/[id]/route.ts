@@ -29,6 +29,9 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
 
     return NextResponse.json({ product, deliveryDay });
   } catch (e) {
-    console.error(e, "fetching product details failed");
+    return NextResponse.json(
+      { error: "Internal server error", e },
+      { status: 500 }
+    );
   }
 }
