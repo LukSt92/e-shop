@@ -5,9 +5,13 @@ import Breadcrumb from "@/components/shared/BreadCrumb";
 
 type Params = { id: string };
 
-export default async function ProductDetails({ params }: { params: Params }) {
+export default async function ProductDetails({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const baseUrl = process.env.DB_HOST;
-  const { id } = params;
+  const { id } = await params;
 
   const productData = await fetch(`${baseUrl}/api/products/${id}`);
   const [product, deliveryDay] = await productData.json();
