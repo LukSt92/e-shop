@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "prisma generete && next build",
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@neondatabase/serverless": "^1.0.1",
     "@prisma/client": "^6.16.2",
     "@types/bcryptjs": "^2.4.6",
     "bcrypt": "^6.0.0",
