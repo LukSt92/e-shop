@@ -158,7 +158,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ message: "Cart error" }, { status: 404 });
     }
 
-    const item = user.cart.items.find((i) => i.id === itemId);
+    const item = user.cart.items.find((i: CartItem) => i.id === itemId);
     if (!item) {
       return NextResponse.json(
         { message: "Cart product error" },
