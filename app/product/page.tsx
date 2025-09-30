@@ -4,10 +4,11 @@ import Pagination from "@/components/productPage/Pagination";
 import ProductGrid from "@/components/productPage/ProductGrid";
 import Sorter from "@/components/productPage/Sorter";
 import Breadcrumb from "@/components/shared/BreadCrumb";
+import Loader from "@/components/shared/Loader";
 import { Category, type Product } from "@/lib/types";
 import { getData } from "@/services/getData";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function Product() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -44,7 +45,9 @@ export default function Product() {
         </div>
         <div className="w-4/5">
           <Sorter />
-          <ProductGrid data={products} />
+          <Suspense fallback={<Loader />}>
+            <ProductGrid data={products} />
+          </Suspense>
           <Pagination page={page} totalPages={totalPages} url={paginationUrl} />
         </div>
       </div>

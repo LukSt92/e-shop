@@ -26,8 +26,7 @@ export default function RootLayout({
       >
         <SessionProv>
           <Header />
-          <Suspense fallback={<Loader />} />
-          <main>{children}</main>
+          <Suspense fallback={<Loader />}>{children}</Suspense>
           <Footer />
         </SessionProv>
       </body>

@@ -34,7 +34,6 @@ const RegisterForm = () => {
       if (!res.ok) {
         console.error(result.message || "register error.");
       } else {
-        document.cookie = "registered=true; path=/; max-age=5";
         router.push("/register/success");
       }
     } catch (err: unknown) {

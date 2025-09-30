@@ -15,8 +15,9 @@ export default async function ProductDetails({
   const baseUrl = process.env.DB_HOST;
   const { id } = await params;
 
-  const data = await fetch(`${baseUrl}/api/products/${id}`);
-  const productData = await data.json();
+  const res = await fetch(`${baseUrl}/api/products/${id}`);
+  const data = await res.json();
+  const productData = data[0];
 
   return (
     <div className="px-[40px]">
