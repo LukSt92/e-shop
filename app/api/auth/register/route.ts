@@ -1,27 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { registerSchema } from "@/lib/schema";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const { email, phone, password } = body;
 
-    const validationResult = registerSchema.safeParse(body);
-    if (!validationResult.success) {
+    if (!email || !phone || !password) {
       return NextResponse.json(
         {
           message: "Validation failed",
-          errors: validationResult.error.issues,
         },
         { status: 400 }
       );
     }
 
-    const { email, phone, password } = validationResult.data;
-
     const existingUserByEmail = await prisma.user.findUnique({
-      where: { email },
+      where: { email: email },
     });
 
     if (existingUserByEmail) {
@@ -32,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     const existingUserByPhone = await prisma.user.findUnique({
-      where: { phone },
+      where: { phone: phone },
     });
 
     if (existingUserByPhone) {
@@ -47,10 +43,10 @@ export async function POST(request: NextRequest) {
 
     const newUser = await prisma.user.create({
       data: {
-        email,
-        phone,
+        email: email,
+        phone: phone,
         firstName: email,
-        passwordHash,
+        passwordHash: passwordHash,
       },
     });
 

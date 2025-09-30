@@ -8,30 +8,19 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { emailOrMobile, password } = body;
 
-    const validationResult = loginSchema.safeParse({
-      emailOrMobile,
-      password,
-    });
-
-    if (!validationResult.success) {
+    if (!emailOrMobile || !password) {
       return NextResponse.json(
         {
-          message: "Validation failed",
-          errors: validationResult.error.issues,
+          errors: "All inputs are required.",
         },
         { status: 400 }
       );
     }
 
-    const { emailOrMobile: validEmailOrMobile, password: validPassword } =
-      validationResult.data;
-
-    const isEmail = validEmailOrMobile.includes("@");
-
     const user = await prisma.user.findFirst({
-      where: isEmail
-        ? { email: validEmailOrMobile }
-        : { phone: validEmailOrMobile },
+      where: {
+        OR: [{ email: emailOrMobile }, { phone: emailOrMobile }],
+      },
     });
 
     if (!user) {
@@ -41,10 +30,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const isPasswordValid = await bcrypt.compare(
-      validPassword,
-      user.passwordHash
-    );
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
       return NextResponse.json(
@@ -53,16 +39,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { ...userWithoutPassword } = user;
-
     return NextResponse.json(
       {
         message: "Login successful",
         user: {
-          id: userWithoutPassword.id,
-          email: userWithoutPassword.email,
-          mobile: userWithoutPassword.phone,
-          firstName: userWithoutPassword.firstName,
+          id: user.id,
+          email: user.email,
         },
       },
       { status: 200 }
