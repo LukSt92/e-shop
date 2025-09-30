@@ -15,7 +15,7 @@ export default async function ProductDetails({
   const baseUrl = process.env.DB_HOST;
   const { id } = await params;
 
-  const res = await fetch(`${baseUrl}/api/products/${id}`);
+  const res = await fetch(`/api/products/${id}`);
   const data = await res.json();
   const productData = data[0];
 
