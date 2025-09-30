@@ -49,21 +49,15 @@ export async function POST(request: NextRequest) {
       data: {
         email,
         phone,
-        firstName: email.split("@")[0],
+        firstName: email,
         passwordHash,
-      },
-      select: {
-        id: true,
-        email: true,
-        phone: true,
-        firstName: true,
       },
     });
 
     return NextResponse.json(
       {
         message: "User registered successfully",
-        user: newUser,
+        data: newUser,
       },
       { status: 201 }
     );
