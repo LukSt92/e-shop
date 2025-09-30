@@ -3,6 +3,7 @@ import Gallery from "@/components/productDetailsPage/Gallery";
 import { ProductDesc } from "@/components/productDetailsPage/ProductDesc";
 import Breadcrumb from "@/components/shared/BreadCrumb";
 import Loader from "@/components/shared/Loader";
+import { Product } from "@/lib/types";
 import { Suspense } from "react";
 
 type Params = { id: string };
@@ -15,32 +16,32 @@ export default async function ProductDetails({
   const baseUrl = process.env.DB_HOST;
   const { id } = await params;
 
-  const res = await fetch(`/api/products/${id}`);
+  const res = await fetch(`${baseUrl}/api/products/${id}`);
   const data = await res.json();
-  const productData = data[0];
+  const productData: Product = data.product;
 
   return (
     <div className="px-[40px]">
       <Suspense fallback={<Loader />}>
-        <Breadcrumb productName={productData.product.name} />
+        <Breadcrumb productName={productData.name} />
         <div className="flex justify-between gap-[32px] max-[1080px]:flex-col">
           <div className="flex justify-between gap-[32px] max-[800px]:flex-col">
             <Gallery
-              name={productData.product.name}
-              imageUrls={productData.product.imageUrls}
+              name={productData.name}
+              imageUrls={productData.imageUrls}
             />
             <ProductDesc
-              name={productData.product.name}
-              category={productData.product.category.name}
-              desc={productData.product.description}
-              price={productData.product.price}
-              deliveryDay={productData.deliveryDay}
+              name={productData.name}
+              category={productData.category.name}
+              desc={productData.description}
+              price={productData.price}
+              deliveryDay={"test"}
             />
           </div>
           <Detailer
-            stock={productData.product.stock}
-            price={productData.product.price}
-            id={productData.product.id}
+            stock={productData.stock}
+            price={productData.price}
+            id={productData.id}
           />
         </div>
       </Suspense>
