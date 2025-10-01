@@ -10,6 +10,11 @@
     "seed": "tsx prisma/seed.ts",
     "build:t": "next build --turbopack"
   },
+  "pkg": {
+    "assets": [
+      "app/generated/prisma/*.node"
+    ]
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@neondatabase/serverless": "^1.0.1",
