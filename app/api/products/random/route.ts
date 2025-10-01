@@ -1,27 +1,20 @@
-import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { productsService } from "@/services/productsService";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const products = await prisma.product.findMany({
-      include: {
-        category: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
+    const { searchParams } = new URL(req.url);
+    const limit = searchParams.get("limit")
+      ? Number(searchParams.get("limit"))
+      : undefined;
 
-    const shuffledProducts = products
-      .map((p) => ({ sort: Math.random(), value: p }))
-      .sort((a, b) => a.sort - b.sort)
-      .map((a) => a.value);
+    const products = await productsService.getShuffled(limit);
 
-    return NextResponse.json(shuffledProducts);
-  } catch (e) {
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error("Error fetching shuffled products:", error);
     return NextResponse.json(
-      { error: "Internal server error", e },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

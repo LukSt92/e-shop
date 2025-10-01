@@ -3,45 +3,45 @@ import Gallery from "@/components/productDetailsPage/Gallery";
 import { ProductDesc } from "@/components/productDetailsPage/ProductDesc";
 import Breadcrumb from "@/components/shared/BreadCrumb";
 import Loader from "@/components/shared/Loader";
-import { Product } from "@/lib/types";
+import { productsService } from "@/services/productsService";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
-type Params = { id: string };
+type ProductDetailsPageProps = {
+  params: Promise<{ id: string }>;
+};
 
-export default async function ProductDetails({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
-  const baseUrl = process.env.DB_HOST;
+export default async function ProductPage({ params }: ProductDetailsPageProps) {
   const { id } = await params;
 
-  const res = await fetch(`${baseUrl}/api/products/${id}`);
-  const data = await res.json();
-  const productData: Product = data.product;
+  let result;
+  try {
+    result = await productsService.getById(Number(id));
+  } catch (error) {
+    notFound();
+  }
+
+  const { product, deliveryDay } = result;
 
   return (
     <div className="px-[40px]">
       <Suspense fallback={<Loader />}>
-        <Breadcrumb productName={productData.name} />
+        <Breadcrumb productName={product.name} />
         <div className="flex justify-between gap-[32px] max-[1080px]:flex-col">
           <div className="flex justify-between gap-[32px] max-[800px]:flex-col">
-            <Gallery
-              name={productData.name}
-              imageUrls={productData.imageUrls}
-            />
+            <Gallery name={product.name} imageUrls={product.imageUrls} />
             <ProductDesc
-              name={productData.name}
-              category={productData.category.name}
-              desc={productData.description}
-              price={productData.price}
-              deliveryDay={"test"}
+              name={product.name}
+              category={product.category.name}
+              desc={product.description}
+              price={product.price}
+              deliveryDay={deliveryDay}
             />
           </div>
           <Detailer
-            stock={productData.stock}
-            price={productData.price}
-            id={productData.id}
+            stock={product.stock}
+            price={product.price}
+            id={product.id}
           />
         </div>
       </Suspense>

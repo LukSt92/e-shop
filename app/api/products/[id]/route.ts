@@ -1,36 +1,28 @@
-import { prisma } from "@/lib/prisma";
+import { productsService } from "@/services/productsService";
 import { NextRequest, NextResponse } from "next/server";
 
-type Params = Promise<{ id: string }>;
+type Params = {
+  id: string;
+};
 
-export async function GET(req: NextRequest, { params }: { params: Params }) {
-  const { id } = await params;
-  const productId = Number(id);
-
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<Params> }
+) {
   try {
-    const product = await prisma.product.findUnique({
-      where: { id: Number(productId) },
-      include: {
-        category: {
-          select: { id: true, name: true },
-        },
-      },
-    });
+    const { id } = await params;
+    const productId = Number(id);
+    const result = await productsService.getById(productId);
 
-    const today = new Date();
-    const randomDays = Math.floor(Math.random() * 7) + 1;
-    const deliveryDate = new Date(today);
-    deliveryDate.setDate(today.getDate() + randomDays);
+    return NextResponse.json(result);
+  } catch (error) {
+    if (error instanceof Error && error.message === "Product not found") {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
 
-    const deliveryDay = deliveryDate.toLocaleDateString("en-Us", {
-      day: "numeric",
-      month: "short",
-    });
-
-    return NextResponse.json({ product, deliveryDay });
-  } catch (e) {
+    console.error("Error fetching product:", error);
     return NextResponse.json(
-      { error: "Internal server error", e },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

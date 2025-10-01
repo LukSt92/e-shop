@@ -1,14 +1,14 @@
-import { prisma } from "@/lib/prisma";
+import { categoriesService } from "@/services/categoriesService";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await categoriesService.getAll();
 
     return NextResponse.json({ categories });
   } catch (e) {
     return NextResponse.json(
-      { error: "Internal server error", e },
+      { error: "Failed to fetch categories" },
       { status: 500 }
     );
   }

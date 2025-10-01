@@ -2,28 +2,14 @@ import CategoryList from "@/components/homePage/CategoryList";
 import MainCarousel from "@/components/homePage/MainCarousel";
 import BrandList from "@/components/homePage/BrandList";
 import RandomProductsList from "@/components/homePage/RandomProductsList";
-import { prisma } from "@/lib/prisma";
+import { categoriesService } from "@/services/categoriesService";
+import { brandsService } from "@/services/brandsService";
+import { productsService } from "@/services/productsService";
 
 export default async function HomePage({}) {
-  const categories = await prisma.category.findMany();
-  const brands = await prisma.brand.findMany();
-  const products = await prisma.product.findMany({
-    include: {
-      category: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
-  const shuffledProducts = products
-    .map((p) => ({ sort: Math.random(), value: p }))
-    .sort((a, b) => a.sort - b.sort)
-    .map((a) => a.value);
-  const randomProducts = shuffledProducts.map((p) => ({
-    ...p,
-    price: p.price.toNumber(),
-  }));
+  const categories = await categoriesService.getAll();
+  const brands = await brandsService.getAll();
+  const randomProducts = await productsService.getShuffled(6);
 
   return (
     <div>

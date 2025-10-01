@@ -18,7 +18,9 @@ export type Product = {
   price: number;
   stock: number;
   imageUrls: string[];
-  category: { name: string };
+  categoryId: number;
+  createdAt: Date;
+  category: { id: number; name: string };
 };
 
 export type CartItem = {
