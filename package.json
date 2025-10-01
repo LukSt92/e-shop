@@ -8,12 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts",
-    "build:t": "next build --turbopack"
-  },
-  "pkg": {
-    "assets": [
-      "app/generated/prisma/*.node"
-    ]
+    "build:t": "next build --turbopack",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
