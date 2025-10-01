@@ -13,7 +13,6 @@ type LoginFormData = z.infer<typeof loginSchema>;
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const [step, setStep] = useState<"email" | "password">("email");
-  const [emailOrMobile, setEmailOrMobile] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const {
@@ -25,7 +24,7 @@ const LoginForm: React.FC = () => {
     mode: "onSubmit",
   });
 
-  const handleEmailSubmit = (data: LoginFormData) => {
+  const handleEmailSubmit = async (data: LoginFormData) => {
     if (!data.emailOrMobile) {
       setErrorMessage("Please enter your email or mobile.");
       return;
@@ -40,7 +39,6 @@ const LoginForm: React.FC = () => {
     }
 
     setErrorMessage(null);
-    setEmailOrMobile(data.emailOrMobile);
     setStep("password");
     reset({ emailOrMobile: data.emailOrMobile, password: "" });
   };
@@ -55,7 +53,7 @@ const LoginForm: React.FC = () => {
 
     try {
       const result = await signIn("credentials", {
-        emailOrMobile: emailOrMobile,
+        emailOrMobile: data.emailOrMobile,
         password: data.password,
         redirect: false,
       });
