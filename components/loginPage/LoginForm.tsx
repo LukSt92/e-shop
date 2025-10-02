@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
 
     try {
       const result = await signIn("credentials", {
-        emailOrMobile: data.emailOrMobile,
+        identifier: data.emailOrMobile,
         password: data.password,
         redirect: false,
       });

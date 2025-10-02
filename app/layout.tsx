@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import SessionProv from "@/components/layout/SessionProv";
+import { SessionProv } from "@/components/layout/SessionProv";
 import { Suspense } from "react";
 import Loader from "@/components/shared/Loader";
 
