@@ -13,8 +13,6 @@ const CartProducts = ({ cart, isChecked }: CartProductsProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  console.log(isChecked);
-
   const selectAllHandler = async (newSelectAll: boolean) => {
     setLoading(true);
     try {

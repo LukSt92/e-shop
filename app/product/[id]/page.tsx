@@ -18,6 +18,7 @@ export default async function ProductPage({ params }: ProductDetailsPageProps) {
   try {
     result = await productsService.getById(Number(id));
   } catch (error) {
+    console.error(error);
     notFound();
   }
 

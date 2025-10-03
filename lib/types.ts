@@ -48,3 +48,42 @@ export type CartItem = {
     };
   };
 };
+
+export type OrderItem = {
+  id: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+  product: {
+    id: number;
+    name: string;
+    price: number;
+    imageUrls: string[];
+    categoryId: number;
+    category: {
+      id: number;
+      name: string;
+    };
+  };
+};
+
+export type Order = {
+  id: number;
+  userId: number;
+  status: OrderStatus;
+  total: number;
+  createdAt: Date;
+  updatedAt: Date;
+  items: OrderItem[];
+};
+
+export enum OrderStatus {
+  PENDING = "PENDING",
+  PLACED = "PLACED",
+  SHIPPED = "SHIPPED",
+  DELIVERED = "DELIVERED",
+  CANCELLED = "CANCELLED",
+}

@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
 import Button from "../shared/Button";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type CartDetailerProps = {
   totalQuantity: number;
@@ -7,6 +10,33 @@ type CartDetailerProps = {
 };
 
 const CartDetailer = ({ totalQuantity, totalPrice }: CartDetailerProps) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        //TODO dodać notke
+        router.push(`/`);
+      } else {
+        console.error(data.message || "Error while placing order");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error while placing order");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col w-[423px] max-h-fit p-[24px] bg-neutral-900 border border-border rounded-md max-[500px]:w-[350px] max-[1200px]:self-center">
       <p className="text-[18px] text-neutral-50 font-medium pb-[16px]">
@@ -25,8 +55,16 @@ const CartDetailer = ({ totalQuantity, totalPrice }: CartDetailerProps) => {
             {totalPrice.toFixed(2)}
           </p>
         </div>
-        <Button style="fill" size="XL" fit={false}>
-          <p className="text-[16px] text-neutral-900 font-medium ">Checkout</p>
+        <Button
+          style="fill"
+          size="XL"
+          fit={false}
+          onClick={handleCheckout}
+          disabled={loading}
+        >
+          <p className="text-[16px] text-neutral-900 font-medium ">
+            {loading ? "Processing" : "Checkout"}
+          </p>
         </Button>
       </div>
     </div>
