@@ -24,7 +24,6 @@ const CartDetailer = ({ totalQuantity, totalPrice }: CartDetailerProps) => {
       const data = await res.json();
 
       if (res.ok) {
-        //TODO dodać notke
         router.push(`/`);
       } else {
         console.error(data.message || "Error while placing order");

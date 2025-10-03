@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Badge from "./Badge";
 import Link from "next/link";
 import CartIcon from "../icons/CartIcon";
+import { enqueueSnackbar } from "notistack";
 
 type ProductCardProps = {
   data: Product;
@@ -27,7 +28,7 @@ const ProductCard = ({ data }: ProductCardProps) => {
       });
 
       if (res.ok) {
-        // TODO dodać notyfikacje
+        enqueueSnackbar("Product Successfully Added", { variant: "success" });
       } else {
         const data = await res.json();
         alert(data.message || "Error occured while adding to cart");

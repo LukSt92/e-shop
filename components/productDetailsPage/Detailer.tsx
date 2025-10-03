@@ -4,6 +4,7 @@ import Button from "../shared/Button";
 import MinusIcon from "../icons/MinusIcon";
 import PlusIcon from "../icons/PlusIcon";
 import CartIcon from "../icons/CartIcon";
+import { enqueueSnackbar } from "notistack";
 
 type DetailerProps = {
   stock: number;
@@ -39,7 +40,7 @@ const Detailer = ({ stock, price, id }: DetailerProps) => {
       });
 
       if (res.ok) {
-        // TODO dodać notyfikacje
+        enqueueSnackbar("Product Successfully Added", { variant: "success" });
       } else {
         const data = await res.json();
         alert(data.message || "Error occured while adding to cart");
