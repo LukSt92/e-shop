@@ -3,13 +3,14 @@ import React from "react";
 import Logo from "../shared/Logo";
 import Button from "../shared/Button";
 import NavBar from "../shared/NavBar";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import CartIcon from "../icons/CartIcon";
+import { useEffect } from "react";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <div className="px-[40px] py-[32px]">
@@ -27,6 +28,11 @@ const Header = () => {
                 height={40}
                 width={40}
               />
+              <Button style="stroke" size="L" onClick={() => signOut()}>
+                <p className="text-[16px] text-primary-500 font-medium px-[20px]">
+                  Sign out
+                </p>
+              </Button>
             </div>
           ) : (
             <Link href={"/login"}>

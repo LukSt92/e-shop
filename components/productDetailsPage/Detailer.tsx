@@ -4,7 +4,6 @@ import Button from "../shared/Button";
 import MinusIcon from "../icons/MinusIcon";
 import PlusIcon from "../icons/PlusIcon";
 import CartIcon from "../icons/CartIcon";
-import { addToCart } from "@/services/addToCart";
 
 type DetailerProps = {
   stock: number;
@@ -14,6 +13,7 @@ type DetailerProps = {
 
 const Detailer = ({ stock, price, id }: DetailerProps) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const quantityHandler = (add: boolean) => {
     if (add) {
@@ -22,6 +22,32 @@ const Detailer = ({ stock, price, id }: DetailerProps) => {
     } else {
       if (quantity === 1) setQuantity(quantity);
       else setQuantity(quantity - 1);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: id,
+          quantity: quantity,
+        }),
+      });
+
+      if (res.ok) {
+        // TODO dodać notyfikacje
+      } else {
+        const data = await res.json();
+        alert(data.message || "Error occured while adding to cart");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,10 +88,11 @@ const Detailer = ({ stock, price, id }: DetailerProps) => {
         </p>
       </div>
       <Button
+        disabled={loading}
         style="stroke"
         size="XXL"
         fit={false}
-        onClick={() => addToCart(id, quantity)}
+        onClick={() => handleAddToCart()}
       >
         Add to Cart
         <CartIcon color="#ee701d" />

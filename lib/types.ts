@@ -23,18 +23,27 @@ export type Product = {
   category: { id: number; name: string };
 };
 
+export type Cart = {
+  id: number;
+  userId: number;
+  items: CartItem[];
+};
+
 export type CartItem = {
   id: number;
   cartId: number;
   productId: number;
   quantity: number;
   addedPrice: number;
+  isSelect: boolean;
   product: {
+    id: number;
     name: string;
     price: number;
-    imageUrls: string;
+    imageUrls: string[];
     stock: number;
     category: {
+      id: number;
       name: string;
     };
   };

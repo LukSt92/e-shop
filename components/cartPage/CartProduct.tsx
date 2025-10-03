@@ -1,70 +1,91 @@
 "use client";
 import { CartItem } from "@/lib/types";
 import Image from "next/image";
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import React, { useState } from "react";
 import Badge from "../shared/Badge";
 import MinusIcon from "../icons/MinusIcon";
 import PlusIcon from "../icons/PlusIcon";
 import TrashIcon from "../icons/TrashIcon";
+import { useRouter } from "next/navigation";
 
 type CartProductProps = {
   item: CartItem;
-  fetchCart: () => void;
-  setSelected: Dispatch<SetStateAction<CartItem[]>>;
-  selected: CartItem[];
 };
 
-const CartProduct = ({
-  selected,
-  item,
-  fetchCart,
-  setSelected,
-}: CartProductProps) => {
-  const [quantity, setQuantity] = useState<number>(item.quantity);
+const CartProduct = ({ item }: CartProductProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
-  const selectHandler = () => {
-    setSelected((prev) =>
-      prev.includes(item) ? prev.filter((x) => x !== item) : [...prev, item]
-    );
-  };
+  const selectHandler = async (newSelect: boolean) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/cart", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          itemId: item.id,
+          isSelect: newSelect,
+        }),
+      });
 
-  const quantityHandler = (add: boolean) => {
-    if (add) {
-      if (quantity === item.product.stock) setQuantity(quantity);
-      else setQuantity(quantity + 1);
-    } else {
-      if (quantity === 1) setQuantity(quantity);
-      else setQuantity(quantity - 1);
+      if (res.ok) {
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Error updating selection:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const updateCart = async (itemId: number, newQty: number) => {
-    if (newQty < 1) return;
-    await fetch(`/api/cart/`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId: itemId, quantity: newQty }),
-    });
+  const quantityHandler = async (newQuantity: number) => {
+    if (newQuantity < 1 || newQuantity > item.product.stock) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/cart", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          itemId: item.id,
+          quantity: newQuantity,
+        }),
+      });
+
+      if (res.ok) {
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const removeItem = async (itemId: number) => {
-    await fetch(`/api/cart/`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ itemId: itemId }),
-    });
-    fetchCart();
-  };
+  const removeItem = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/cart", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ itemId: item.id }),
+      });
 
-  useEffect(() => {
-    if (quantity !== item.quantity) updateCart(item.id, quantity);
-  }, [item.id, quantity, item.quantity]);
+      if (res.ok) {
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Error removing item:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex gap-x-[24px] items-center">
       <input
-        onChange={() => selectHandler()}
-        checked={selected.includes(item)}
+        onChange={() => selectHandler(!item.isSelect)}
+        checked={item.isSelect}
         type="checkbox"
         className="min-w-[26px] min-h-[26px]  accent-primary-400"
       />
@@ -82,10 +103,7 @@ const CartProduct = ({
               <p className="text-[20px] text-neutral-50 font-medium text-wrap">
                 {item.product.name}
               </p>
-              <div
-                className="cursor-pointer"
-                onClick={() => removeItem(item.id)}
-              >
+              <div className="cursor-pointer" onClick={() => removeItem()}>
                 <TrashIcon />
               </div>
             </div>
@@ -95,13 +113,19 @@ const CartProduct = ({
                 {Number(item.product.price).toFixed(2)}
               </p>
               <div className="flex border border-neutral-50 rounded-md px-[20px] py-[14px] gap-x-[14px]">
-                <div onClick={() => quantityHandler(false)}>
+                <div
+                  aria-disabled={loading || item.quantity <= 1}
+                  onClick={() => quantityHandler(item.quantity - 1)}
+                >
                   <MinusIcon />
                 </div>
                 <p className="text-[16px] font-medium text-neutral-50">
-                  {quantity}
+                  {item.quantity}
                 </p>
-                <div onClick={() => quantityHandler(true)}>
+                <div
+                  aria-disabled={loading || item.quantity >= item.product.stock}
+                  onClick={() => quantityHandler(item.quantity + 1)}
+                >
                   <PlusIcon />
                 </div>
               </div>

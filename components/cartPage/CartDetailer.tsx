@@ -16,13 +16,13 @@ const CartDetailer = ({ totalQuantity, totalPrice }: CartDetailerProps) => {
         <p className="text-[16px] text-neutral-100 font-medium ">
           Total Product Price ({totalQuantity} Item)
         </p>
-        <p>{totalPrice}</p>
+        <p>{totalPrice.toFixed(2)}</p>
       </div>
       <div className="pt-[24px]">
         <div className="flex justify-between items-center pb-[32px]">
           <p className="text-[18px] text-neutral-50 font-medium">Subtotal</p>
           <p className="text-[28px] text-neutral-50 font-medium">
-            {totalPrice}
+            {totalPrice.toFixed(2)}
           </p>
         </div>
         <Button style="fill" size="XL" fit={false}>
