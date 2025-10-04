@@ -1,27 +1,36 @@
-import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth;
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const exceptions = ["/login", "/register", "/api/auth"];
+  const sessionToken =
+    req.cookies.get("authjs.session-token") ||
+    req.cookies.get("__Secure-authjs.session-token");
 
-  const isException = exceptions.some((path) => pathname.startsWith(path));
+  const isLoggedIn = !!sessionToken;
+  const publicPaths = ["/login", "/register"];
+  const isAuthRoute = pathname.startsWith("/api/auth");
 
-  if (!isLoggedIn && !isException) {
-    return NextResponse.redirect(new URL("/login", req.url));
+  if (isAuthRoute) {
+    return NextResponse.next();
   }
 
-  if (isLoggedIn && (pathname === "/login" || pathname === "/register")) {
+  if (isLoggedIn && publicPaths.includes(pathname)) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
+  if (!isLoggedIn && !publicPaths.includes(pathname)) {
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.gif$|.*\\.svg$).*)",
   ],
 };
