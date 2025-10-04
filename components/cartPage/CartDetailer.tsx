@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../shared/Button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 
 type CartDetailerProps = {
   totalQuantity: number;
@@ -21,12 +22,11 @@ const CartDetailer = ({ totalQuantity, totalPrice }: CartDetailerProps) => {
         method: "POST",
       });
 
-      const data = await res.json();
-
       if (res.ok) {
         router.push(`/`);
+        enqueueSnackbar("Order has been placed!", { variant: "success" });
       } else {
-        console.error(data.message || "Error while placing order");
+        enqueueSnackbar("Select items to place order", { variant: "warning" });
       }
     } catch (error) {
       console.error("Error:", error);

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { registerSchema } from "@/lib/schema";
 import { z } from "zod";
 import InputForm from "../shared/InputForm";
+import { enqueueSnackbar } from "notistack";
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -34,6 +35,9 @@ const RegisterForm = () => {
       if (!res.ok) {
         console.error(result.message || "register error.");
       } else {
+        enqueueSnackbar("registration complete, you can now log in", {
+          variant: "success",
+        });
         router.push("/register/success");
       }
     } catch (err: unknown) {

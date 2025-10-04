@@ -7,6 +7,7 @@ import { z } from "zod";
 import { loginSchema } from "@/lib/schema";
 import { emailRegex, phoneRegex } from "@/lib/regex";
 import InputForm from "../shared/InputForm";
+import { enqueueSnackbar } from "notistack";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -59,15 +60,17 @@ const LoginForm: React.FC = () => {
       });
 
       if (result?.error) {
-        setErrorMessage("Email/Phone Number or Password Incorrect");
+        enqueueSnackbar("Email/Phone Number or Password Incorrect", {
+          variant: "error",
+        });
         setStep("email");
         reset();
         return;
       }
 
       if (result?.ok) {
+        enqueueSnackbar("Login success!", { variant: "success" });
         router.push("/");
-        router.refresh();
       }
     } catch (e) {
       console.error(e);
