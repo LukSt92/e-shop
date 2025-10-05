@@ -10,7 +10,9 @@ An e-commerce application with user registration, login, and full CRUD managemen
 
 ## Technologies
 - Next.js 15
+- Typescript
 - React
+- Tailwind CSS
 - NextAuth v5
 - Prisma ORM
 - PostgreSQL
