@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const sessionToken = req.cookies.get("__Secure-authjs.session-token");
+  const sessionToken = req.cookies.get("my-app-session")?.value;
 
   const isLoggedIn = !!sessionToken;
   const publicPaths = ["/login", "/register"];
