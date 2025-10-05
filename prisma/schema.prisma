@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  firstName    String?
+  email        String    @unique
+  phone        String    @unique
+  passwordHash String
+  addresses    Address[]
+  orders       Order[]
+  cart         Cart?
+}
+
+model Address {
+  id         Int    @id @default(autoincrement())
+  street     String
+  postalCode String
+  city       String
+  country    String
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  price       Decimal
+  stock       Int
+  imageUrls   String[]
+  brandId     Int
+  brand       Brand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  categoryId  Int
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now()) 
+  cartItems   CartItem[]
+}
+
+model Brand {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  logoUrl   String
+  products  Product[]
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+  imageUrl    String
+  products    Product[]
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  status     OrderStatus @default(PENDING)
+  total      Decimal     @db.Decimal(10, 2)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
+}
+
+model OrderItem {
+  id         Int     @id @default(autoincrement())
+  orderId    Int
+  productId  Int
+  quantity   Int
+  price      Decimal @db.Decimal(10, 2)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  PLACED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  user      User       @relation(fields: [userId], references: [id])
+}
+
+model CartItem {
+  id         Int      @id @default(autoincrement())
+  cartId     Int
+  productId  Int
+  quantity   Int      @default(1)
+  addedPrice Decimal
+  isSelect   Boolean  @default(false)
+  cart       Cart     @relation(fields: [cartId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+}
