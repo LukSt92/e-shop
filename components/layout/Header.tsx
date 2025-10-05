@@ -7,9 +7,20 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import CartIcon from "../icons/CartIcon";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut({
+      redirect: false,
+    });
+
+    router.push("/login");
+    router.refresh();
+  };
 
   return (
     <div className="px-[40px] py-[32px]">
@@ -29,7 +40,7 @@ const Header = () => {
                   width={40}
                 />
               </Link>
-              <Button style="stroke" size="L" onClick={() => signOut()}>
+              <Button style="stroke" size="L" onClick={handleSignOut}>
                 <p className="text-[16px] text-primary-500 font-medium px-[20px]">
                   Sign out
                 </p>
