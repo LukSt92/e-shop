@@ -8,6 +8,8 @@ import Button from "@/components/shared/Button";
 import { categoriesService } from "@/services/categoriesService";
 import { productsService } from "@/services/productsService";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 type SearchParams = {
   categoryId?: string;
@@ -25,6 +27,12 @@ type ProductsPageProps = {
 export default async function ProductsPage({
   searchParams,
 }: ProductsPageProps) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
   const params = await searchParams;
   const categoryIds = params.categoryId?.split(" ").map((id) => parseInt(id));
   const minPrice = params.minPrice ? Number(params.minPrice) : undefined;

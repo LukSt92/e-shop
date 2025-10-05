@@ -5,8 +5,16 @@ import RandomProductsList from "@/components/homePage/RandomProductsList";
 import { categoriesService } from "@/services/categoriesService";
 import { brandsService } from "@/services/brandsService";
 import { productsService } from "@/services/productsService";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function HomePage({}) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
   const categories = await categoriesService.getAll();
   const brands = await brandsService.getAll();
   const randomProducts = await productsService.getShuffled(6);

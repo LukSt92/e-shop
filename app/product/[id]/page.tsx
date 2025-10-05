@@ -6,12 +6,20 @@ import Loader from "@/components/shared/Loader";
 import { productsService } from "@/services/productsService";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 type ProductDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
 
 export default async function ProductPage({ params }: ProductDetailsPageProps) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
   const { id } = await params;
 
   let result;
